@@ -1,10 +1,10 @@
 class BooksController < ApplicationController
   def index
+  	@books = Book.all
+  	@book = Book.new
   end
 
   def new
-  	@books = Book.all
-  	@book = Book.new
   end
 
   def create
@@ -13,7 +13,9 @@ class BooksController < ApplicationController
   	# DBへ保存
   	book.save
   	# 投稿詳細画面にリダイレクト
-  	redirect_to book_path(book.id)
+  	if book.save
+  	redirect_to book_path(book.id),notice: "Book was successfully created."
+    end
   end
 
   def show
@@ -25,7 +27,18 @@ class BooksController < ApplicationController
   end
 
   def update
-  	
+  	book = Book.find(params[:id])
+  	book.update(book_params)
+  	if book.update(book_params)
+  	redirect_to book_path(book.id), notice: "Book was successfully updated."
+    end
+  end
+
+  def destroy
+  	@book = Book.find(params[:id])
+  	@book.destroy
+  	redirect_to books_path, notice: "Book was successfully destroyed."
+    end
   end
 
   private
@@ -34,4 +47,3 @@ class BooksController < ApplicationController
   	params.require(:book).permit(:title, :body)
   end
 
-end

@@ -1,6 +1,6 @@
 <h2>Editing Book</h2>
 
-<%= form_for(@book, url:"/books/#{[@book.id]}") do |f| %>
+<%= form_for(@book) do |f| %>
 
   <h3>Title</h3>
   <%= f.text_field :title %>
@@ -11,3 +11,5 @@
 
 <% end %>
 
+<%= link_to 'Show', book_path %>
+<%= link_to 'Back', 'http://localhost:3000/books/' %>
