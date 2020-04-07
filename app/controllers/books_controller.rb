@@ -9,12 +9,15 @@ class BooksController < ApplicationController
 
   def create
   	# ストロングパラメーターを使用
-  	book = Book.new(book_params)
-  	# DBへ保存
-  	book.save
+  	@book = Book.new(book_params)
+  	# 保存
+  	@book.save
   	# 投稿詳細画面にリダイレクト
-  	if book.save
-  	redirect_to book_path(book.id),notice: "Book was successfully created."
+  	if @book.save
+  	redirect_to book_path(@book.id),notice: "Book was successfully created."
+  	  else
+  	  	@books = Book.all
+  	  	render action: :index
     end
   end
 
@@ -27,10 +30,13 @@ class BooksController < ApplicationController
   end
 
   def update
-  	book = Book.find(params[:id])
-  	book.update(book_params)
-  	if book.update(book_params)
-  	redirect_to book_path(book.id), notice: "Book was successfully updated."
+  	@book = Book.find(params[:id])
+  	@book.update(book_params)
+  	if @book.update(book_params)
+  	redirect_to book_path(@book.id), notice: "Book was successfully updated."
+  	  else
+  	  	@books = Book.new
+  	  	render action: :edit
     end
   end
 
@@ -38,7 +44,6 @@ class BooksController < ApplicationController
   	@book = Book.find(params[:id])
   	@book.destroy
   	redirect_to books_path, notice: "Book was successfully destroyed."
-    end
   end
 
   private
@@ -46,4 +51,7 @@ class BooksController < ApplicationController
   def book_params
   	params.require(:book).permit(:title, :body)
   end
+
+end
+
 
