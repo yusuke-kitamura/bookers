@@ -14,9 +14,17 @@
  *= require_self
  */
 main{
-	margin: 25px;
+	margin: 0 auto;
 }
 
 p{
 	color: green;
+}
+
+#error_explanation h3{
+	color: red;
+}
+
+#error_explanation ul li{
+	color: red;
 }

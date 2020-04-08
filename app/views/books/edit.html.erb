@@ -16,15 +16,15 @@
   <% end %>
 
   <div class="title">Title</div>
-  <%= f.text_field :title %>
+  <%= f.text_field :title %><br>
 
   <div class="title">Body</div>
   <%= f.text_area :body %><br>
-  <%= f.submit 'Update Book' %>
+  <%= f.submit 'Update Book' %><br>
 
 <% end %>
 
 <%= link_to 'Show', book_path %>
-<%= link_to 'Back', 'http://localhost:3000/books/' %>
+<%= link_to 'Back', books_path %>
 
 </main>
